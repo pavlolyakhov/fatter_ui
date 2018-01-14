@@ -1,0 +1,19 @@
+.auth-controls{
+  float:right;
+}
+.navbar-default{
+  background-color: #f08080;
+  /*background: transparent;*/
+  font-weight: 900;
+}
+.navbar-default .navbar-brand {
+    color: #337ab7;
+}
+.navbar {
+    border: 1px solid #f08080;
+    margin-bottom: 0;
+    border-radius: 0;
+}
+.nav-link{
+  cursor:pointer;
+}

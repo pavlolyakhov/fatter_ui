@@ -1,0 +1,66 @@
+.goals-container{
+  background-color: #f5f5dc;
+}
+.goals-page {
+  padding-top: 70px;
+  margin-left: 20px;
+  /* display: flex; */
+  flex-direction: row;
+  justify-content: center;
+}
+.goals-page > div{
+  float: left;
+    padding: 10px 20px;
+    background-color: green;
+    color: white;
+    margin: 1% 2%;
+    /* max-width: 250px; */
+    width: 350px;
+    min-height: 150px;
+    max-height: 150px;
+    text-align: center;
+    font-size: 22px;
+    max-width: 16%;
+}
+.goals-page > div > p{
+  height:50%;
+}
+.goals-page div>input, select{
+  width:100%;
+  color:darkgreen;
+  text-align: center;
+}
+.target-error{
+  font-size: 14px;
+  color:pink;
+  height: 18px !important;
+}
+.shopping-basket-total{
+  background-color: black !important;
+  padding: 10px 0px !important;
+}
+.basket-over-limit{
+  color:red !important;
+}
+.shopping-limit{
+  /* background-color: gray !important; */
+}
+.highlight-box{
+  border: 3px solid red;
+  border-radius: 6px;
+}
+.basketActions{
+  width: 100%;
+  background-color: black;
+  padding-bottom: 30px;
+}
+#basketTotal{
+  width:90%;
+}
+#btnSaveBasket{
+  width: 90%;
+  background-color: lightcoral;
+  color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

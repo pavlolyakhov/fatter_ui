@@ -1,0 +1,8 @@
+.login-page{
+  background-image: url(../../img/brooke-lark-230140.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.login-page > div{
+  padding-top: 1px;
+}

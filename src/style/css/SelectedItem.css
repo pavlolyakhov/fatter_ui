@@ -1,0 +1,20 @@
+.selected-item-remove{
+  padding: 15px 15px;
+  color: pink;
+  border: 1px solid white;
+  border-radius: 5px;
+  margin-left: 25px;
+  cursor: pointer;
+  float: right;
+}
+.selectedItem{
+  margin: 5px;
+  padding: 5px 0px;
+  margin-right: 30px;
+}
+.selectedItem img {
+  margin-right: 10px;
+}
+.selected-basket-item-text{
+
+}

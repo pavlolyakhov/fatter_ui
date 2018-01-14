@@ -1,0 +1,16 @@
+export const AUTH_USER = 'auth_user';
+export const UNAUTH_USER = 'unauth_user';
+export const AUTH_ERROR = 'auth_error';
+export const FETCH_ITEMS = "fetch_items";
+export const FETCH_MESSAGE = "fetch_message";
+export const UPDATE_CONSUMPTION_TARGET = "update_consumption_target";
+export const REMOVE_CHAR_CONSUMPTION_TARGET = "backspace_consumption_target";
+export const SET_SHOPPING_PERIOD = "set_shopping_period";
+// export const SET_SEARCH_TEXT = "set_search_text";
+export const SET_PRODUCTS = "set_products";
+export const UPDATE_SELECTED_ITEMS = "update_selected_products";
+export const UPDATE_PRODUCT_QUANTITY = "update_product_quantity";
+export const UPDATE_OVERLIMIT = "update_overlimit";
+export const REMOVE_FROM_BASKET = "remove_from_basket";
+export const GET_NEW_GUEST_ID = "get_new_guest_id";
+export const SAVE_GUEST_SELECTION = "save_guest_selection";
