@@ -1,4 +1,3 @@
-//import React from 'react'
 import {
   applyMiddleware,
   createStore,
@@ -23,7 +22,7 @@ if(token){                                                // registered user
   store.dispatch({type:AUTH_USER});
 }
 else if(guestId){                                         // used to login as guest
-  console.log("guest Id already exists");
+  console.log("guest Id found");
 }
 else{                                                     // no guest id
   // generate id and store it

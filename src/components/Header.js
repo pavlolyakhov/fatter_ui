@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, withRouter } from 'react-router-dom';
 import * as actions from '../actions';
 import {BRAND_NAME} from '../config';
 import '../style/css/Header.css';
@@ -12,27 +12,34 @@ class Header extends Component{
   }
   toggleSigninButtonText(){
     if(this.props.authenticated){
-      //localStorage.setItem("token", null);
       return (
         <li className="nav-item" key="0">
-          {/* <Link className="nav-link" to="/signout">Sign out</Link> */}
           <a className="nav-link" onClick={this.handleSignoutClick.bind(this)}>Sign out</a>
         </li>
       )
     }
+    else if(this.props.history.location.pathname === '/goals'){
+      return [
+        <li className="nav-item" key="1">
+          <Link className="nav-link" to="/signin">Save</Link>
+        </li>
+      ]
+    }
     else{
+      console.log('history', this.props.history.location.pathname);
       return [
         <li className="nav-item" key="3">
-          <Link className="nav-link" to="/goals" >Sign in as Guest</Link>
+          <Link className="nav-link" to="/goals">Search</Link>
         </li>,
         <li className="nav-item" key="1">
-          <Link className="nav-link" to="/signin" >Sign in</Link>
+          <Link className="nav-link" to="/signin">Sign in</Link>
         </li>
       ]
     }
   }
 
   render(){
+
     return(
       <nav className="navbar navbar-default navbar-fixed-top">
         <div className="container-fluid">
@@ -57,6 +64,7 @@ class Header extends Component{
 }
 
 function mapStateToProps(state){
+
   return{authenticated : state.auth.authenticated}
 }
-export default connect(mapStateToProps, actions)(Header);
+export default withRouter(connect(mapStateToProps, actions)(Header));

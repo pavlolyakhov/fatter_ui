@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import {
-  // SET_SEARCH_TEXT,
   SET_PRODUCTS,
   UPDATE_SELECTED_ITEMS,
   UPDATE_PRODUCT_QUANTITY,
@@ -19,17 +18,19 @@ const defaultState = {
 };
 
 export default function(state=defaultState, action){
-  let newSelected = {}, basketTotal = 0, overLimit = false;
+  let newSelected = {}, basketTotal = 0, overLimit = false, newProducts= {};
   switch(action.type){
     case SET_PRODUCTS:
       console.log(SET_PRODUCTS, action.payload);
-      const newProducts = {...state.products, ...action.payload.usableObj};
+      if(action.payload.searchOffset === 0){
+        newProducts = {...action.payload.usableObj}
+      }
+      else{
+        newProducts = {...state.products, ...action.payload.usableObj};
+      }
       return {...state, products: newProducts, searchOffset: action.payload.searchOffset, searchText: action.payload.searchText}
     case UPDATE_SELECTED_ITEMS:
       const payloadId = action.payload.id;
-      // const product = state.products.filter((item, i)=> {
-      //     return item.id === payloadId;
-      // });
       const product = state.products[payloadId];
       if(state.selectedItems[payloadId]){
         let existingProductQuantityValue = state.selectedItems[payloadId].productQuantity;

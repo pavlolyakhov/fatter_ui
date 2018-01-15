@@ -6,7 +6,6 @@ export const FETCH_MESSAGE = "fetch_message";
 export const UPDATE_CONSUMPTION_TARGET = "update_consumption_target";
 export const REMOVE_CHAR_CONSUMPTION_TARGET = "backspace_consumption_target";
 export const SET_SHOPPING_PERIOD = "set_shopping_period";
-// export const SET_SEARCH_TEXT = "set_search_text";
 export const SET_PRODUCTS = "set_products";
 export const UPDATE_SELECTED_ITEMS = "update_selected_products";
 export const UPDATE_PRODUCT_QUANTITY = "update_product_quantity";

@@ -8,8 +8,6 @@ import {
   setShoppingPeriod,
   removeFromSelected,
   sendSelectedToServer
-  // scrollThrottle
-  // setSearchText
 } from '../actions/index';
 import Search from './Search';
 import '../style/css/Goals.css';
@@ -60,10 +58,8 @@ class Goals extends Component{
   handleRemoveFromSelected(e){
     console.log('handleRemoveFromSelected', e.currentTarget);
     const currentTarget = e.currentTarget;
-    // if(!target.classList.contains('inputQuantity')){    // click was NOT on Quantity selection, not to select product
-      const itemId = currentTarget.getAttribute('data-productid');
-      this.props.removeFromSelected(itemId);
-    // }
+    const itemId = currentTarget.getAttribute('data-productid');
+    this.props.removeFromSelected(itemId);
   }
   componentDidMount(){
     // create and save guest ID in localStorage if none exists
@@ -155,7 +151,5 @@ const mapPropsToActions = {
   setShoppingPeriod,
   removeFromSelected,
   sendSelectedToServer
-  // setSearchText
-
 };
 export default connect(mapStateToProps, mapPropsToActions)(Goals);

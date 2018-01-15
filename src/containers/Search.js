@@ -3,10 +3,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {
   getProducts,
-  // setSearchText,
   updateSelected,
   updateProductQuantity,
-  //scrollThrottle
 } from '../actions/index';
 import Product from '../components/Product';
 import {searchOffset, searchTake, scrollThrottleDelay} from '../config';
@@ -17,19 +15,18 @@ class Search extends Component{
     super(props);
     this.state = {
       searchText : "tesco",
-      searchBtnText : "Search"
+      searchBtnText : "Search",
+      newSearch : true
     }
     this.getOffset = this.getOffset.bind(this);
     this.checkWindowPosition = this.checkWindowPosition.bind(this);
   }
 
   componentDidMount() {
-    //window.addEventListener('scroll', scrollThrottle);
       window.addEventListener('scroll', _.throttle(this.checkWindowPosition,scrollThrottleDelay));
   }
   componentWillUnmount() {
-    window.removeEventListener('scroll');
-      // window.removeEventListener('scroll', scrollThrottle);
+    //window.removeEventListener('scroll');
   }
   checkWindowPosition(){
     var scrollHeight = document.body.scrollHeight ,
@@ -44,10 +41,11 @@ class Search extends Component{
   }
 
   handleSearchInput(e){
-    // this.props.setSearchText(e.target.value)
     this.setState({
-      searchText : e.target.value
-    })
+      searchText : e.target.value,
+      searchBtnText : "Search",
+      newSearch : true
+    });
   }
 
   getOffset(){
@@ -64,10 +62,6 @@ class Search extends Component{
     this.setState({
       searchBtnText : "Find more"
     });
-    // let offset = searchOffset;
-    // if(this.props.searchText === this.state.searchText ){
-    //   offset = this.props.searchOffset + searchTake;
-    // }
     const offset = this.getOffset();
     this.props.getProducts(this.state.searchText, offset);
   }
@@ -102,7 +96,6 @@ class Search extends Component{
         selectHandlder = {this.handleSelectClick.bind(this)}
         productId = {db[key].id}
         itemFound = {(selected[key]) ? true : false}              //if id key is found in selected -> returns true
-        // itemFound = {item.id in selected}              //if id key is found in selected -> returns true
         selectedId = {(selected[key]) ? selected[key].id : ""}
         handleProductChangeQuantity = {this.handleProductChangeQuantity.bind(this)}
         tpnb = {db[key].tbnp}
@@ -110,7 +103,6 @@ class Search extends Component{
         quantity = {db[key].quantity}
         UnitOfSale = {db[key].UnitOfSale}     // 3 -> means loose item per 100g, come from Tescto API; 1-> packaged ( from observation)
       />
-      //items.push(newItem);
   });
     return(
       <div>
@@ -145,7 +137,6 @@ function mapStateToProps({search, goals}){
 }
 const mapPropsToActions = {
   getProducts,
-  // setSearchText,
   updateSelected,
   updateProductQuantity
 };
