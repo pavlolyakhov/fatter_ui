@@ -8,7 +8,7 @@ import {
   setShoppingPeriod,
   removeFromSelected,
   sendSelectedToServer,
-  getSelectionFromServer
+  getUserData
 } from '../actions/index';
 import Search from './Search';
 import '../style/css/Goals.css';
@@ -22,12 +22,19 @@ class Goals extends Component{
       consumptionTargetError : "",
       selectedListShow : false
     }
-
   }
 
   handleShowSelectedClick(){
     if(this.state.selectedListShow){
-      this.props.sendSelectedToServer(this.props.selectedItems);
+      const goals = {
+        consumptionTarget : this.props.consumptionTarget,
+        weeklyTotal : this.props.weeklyTotal,
+        basketTotal: this.props.basketTotal,
+        overLimit : this.props.overLimit,
+        nextShoppingLimit : this.props.nextShoppingLimit,
+        // howOftenShopValue : this.props.howOftenShopValue
+      }
+      this.props.sendSelectedToServer(this.props.selectedItems, goals);
     }
     this.setState({
       selectedListShow : !this.state.selectedListShow
@@ -71,12 +78,21 @@ class Goals extends Component{
     // update components with user info from db.
     const guestId = localStorage.getItem('guestId');
     if(guestId){
-      this.props.getSelectionFromServer(guestId);
+      this.props.getUserData(guestId);
     }
   }
 
   componentWillUnmount(){
-    this.props.sendSelectedToServer(this.props.selectedItems);
+    // save user selections
+    const goals = {
+      consumptionTarget : this.props.consumptionTarget,
+      weeklyTotal : this.props.weeklyTotal,
+      basketTotal: this.props.basketTotal,
+      overLimit : this.props.overLimit,
+      nextShoppingLimit : this.props.nextShoppingLimit,
+      // howOftenShopValue : this.props.howOftenShopValue
+    }
+    this.props.sendSelectedToServer(this.props.selectedItems, goals);
   }
 
   render(){
@@ -106,11 +122,6 @@ class Goals extends Component{
             <p className="target-error" >{this.state.consumptionTargetError}</p>
           </div>
           <div>
-            <p  className="goals-setting-text">Weekly limit</p>
-            <input readOnly id="basketLimit" value={`${this.props.weeklyTotal} kcal`}
-            placeholder="... kcal" />
-          </div>
-          <div>
             <p className="goals-setting-text">Shopping</p>
             <select id="howOftenShop" value={this.props.howOftenShopValue} onChange={this.handleHowOftenShopChange.bind(this)}>
               <option val="0" defaultValue hidden="hidden">Select...</option>
@@ -120,6 +131,12 @@ class Goals extends Component{
               <option val="1">Once a week</option>
             </select>
           </div>
+          <div>
+            <p  className="goals-setting-text">Weekly limit</p>
+            <input readOnly id="basketLimit" value={`${this.props.weeklyTotal} kcal`}
+            placeholder="... kcal" />
+          </div>
+
           <div className="highlight-box">
             <p className="goals-setting-text">Next shopping limit</p>
             <input readOnly value={this.props.nextShoppingLimit + " kcal"}
@@ -147,13 +164,15 @@ class Goals extends Component{
   }
 }
 function mapStateToProps(state){
+  console.log('state.goals.howOftenShopValue', state.goals.howOftenShopValue);
   return {
     consumptionTarget : state.goals.consumptionTarget,
     weeklyTotal : state.goals.weeklyTotal,
     basketTotal: state.search.basketTotal,
     overLimit : state.search.overLimit,
     nextShoppingLimit : state.goals.nextShoppingLimit,
-    selectedItems : state.search.selectedItems
+    selectedItems : state.search.selectedItems,
+    // howOftenShopValue : state.goals.howOftenShopValue
   }
 }
 const mapPropsToActions = {
@@ -162,6 +181,6 @@ const mapPropsToActions = {
   setShoppingPeriod,
   removeFromSelected,
   sendSelectedToServer,
-  getSelectionFromServer
+  getUserData
 };
 export default connect(mapStateToProps, mapPropsToActions)(Goals);

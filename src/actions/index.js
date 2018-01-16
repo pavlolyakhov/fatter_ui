@@ -149,11 +149,12 @@ export function getProducts(searchTerm, searchOffset){
   }
 }
 
-export function sendSelectedToServer(selectedItems){
+export function sendSelectedToServer(selectedItems, goals){
   console.log('sending selected to server');
+
   const guestId = localStorage.getItem("guestId");
   if(guestId){
-    const dataObj = {guestId, selectedItems};
+    const dataObj = {guestId, selectedItems, goals};
     const request = axios.post(`${ROOT_URL}/saveGuestSelection`, dataObj);
     return{
       type: SAVE_GUEST_SELECTION,
@@ -197,13 +198,12 @@ export function getGuestId(){
 
 }
 
-export function getSelectionFromServer(guestId){
+export function getUserData(guestId){
     return function(dispatch){
       const ax = axios.get(`${ROOT_URL}/getGuestSelection/${guestId}`);
        ax.then(response => {
-       console.log("products recieved", response.data.usableObj);
-      // const result = {...response.data, "searchText" : searchText, "searchOffset" : searchOffset }
-
+       console.log("recieved saved selection", response.data.usableObj);
+        console.log("recieved goals", response.data.goals);
       dispatch({
         type:  SHOW_PREVIOUS_GUEST_PRODUCT_SELECTION_ONLOAD,
         payload: response.data

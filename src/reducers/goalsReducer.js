@@ -1,19 +1,27 @@
 import {
   UPDATE_CONSUMPTION_TARGET,
   REMOVE_CHAR_CONSUMPTION_TARGET,
-  SET_SHOPPING_PERIOD
+  SET_SHOPPING_PERIOD,
+  SHOW_PREVIOUS_GUEST_PRODUCT_SELECTION_ONLOAD
 } from '../actions/types';
 
 const defaultState = {
   consumptionTarget : "",
-  weeklyTotal: "",
   howOftenShopValue: 0,
+  weeklyTotal: "",
   nextShoppingLimit : 0
 };
 
 export default function(state=defaultState, action){
   let newValue, weeklyTotal,nextShoppingLimit;
   switch (action.type) {
+    case SHOW_PREVIOUS_GUEST_PRODUCT_SELECTION_ONLOAD:
+      // const {consumptionTarget, howOftenShopValue, weeklyTotal, nextShoppingLimit} = action.payload.goals;
+      const {consumptionTarget : consumption, howOftenShopValue: shopping} = action.payload.goals;
+      const {weeklyTotal : weekly, nextShoppingLimit: limit} = action.payload.goals;
+
+    return {...state, consumptionTarget:consumption, howOftenShopValue: shopping,
+    weeklyTotal : weekly, nextShoppingLimit: limit}
     case UPDATE_CONSUMPTION_TARGET:
       newValue =  state.consumptionTarget;
       newValue += action.payload;
