@@ -7,7 +7,8 @@ import {
   removeCharFromConsumptionTarget,
   setShoppingPeriod,
   removeFromSelected,
-  sendSelectedToServer
+  sendSelectedToServer,
+  getSelectionFromServer
 } from '../actions/index';
 import Search from './Search';
 import '../style/css/Goals.css';
@@ -25,11 +26,12 @@ class Goals extends Component{
   }
 
   handleShowSelectedClick(){
+    if(this.state.selectedListShow){
+      this.props.sendSelectedToServer(this.props.selectedItems);
+    }
     this.setState({
       selectedListShow : !this.state.selectedListShow
     });
-    this.props.sendSelectedToServer(this.props.selectedItems);
-
   }
 
   checkTargetInput(input){
@@ -61,18 +63,26 @@ class Goals extends Component{
     const itemId = currentTarget.getAttribute('data-productid');
     this.props.removeFromSelected(itemId);
   }
+
   componentDidMount(){
     // create and save guest ID in localStorage if none exists
     // save user selections in db
     // get user guest id on initial load, only on initial load!
     // update components with user info from db.
+    const guestId = localStorage.getItem('guestId');
+    if(guestId){
+      this.props.getSelectionFromServer(guestId);
+    }
+  }
 
+  componentWillUnmount(){
+    this.props.sendSelectedToServer(this.props.selectedItems);
   }
 
   render(){
     const selectedItems = _.map(this.props.selectedItems, (item, i) =>{
       if(item.name && item.productQuantity > 0){
-        return  <SelectedItem key={item.id} text={item.name + " x " + item.productQuantity}
+        return  <SelectedItem key={item.id} text={`${item.productQuantity} X ${item.name}`}
           productImage={item.image}
           handleRemove={this.handleRemoveFromSelected.bind(this)}
           itemId={item.id}
@@ -84,23 +94,24 @@ class Goals extends Component{
         <Header />
         <div className="goals-page">
           <div>
-            <p>
-              Daily target (calories)
+            <p className="goals-setting-text">
+              Daily target
             </p>
             <div>
               <input type="text" maxLength="4" id="consumptionTarget" onKeyDown={this.checkTargetInput.bind(this)}
                 value={this.props.consumptionTarget}
-                placeholder="calories"
+                placeholder="... kcal"
               />
             </div>
             <p className="target-error" >{this.state.consumptionTargetError}</p>
           </div>
           <div>
-            <p>Weekly limit (calories)</p>
-            <input readOnly id="basketLimit" value={this.props.weeklyTotal}/>
+            <p  className="goals-setting-text">Weekly limit</p>
+            <input readOnly id="basketLimit" value={`${this.props.weeklyTotal} kcal`}
+            placeholder="... kcal" />
           </div>
           <div>
-            <p>How often do you shop</p>
+            <p className="goals-setting-text">Shopping</p>
             <select id="howOftenShop" value={this.props.howOftenShopValue} onChange={this.handleHowOftenShopChange.bind(this)}>
               <option val="0" defaultValue hidden="hidden">Select...</option>
               <option val="7">Every Day</option>
@@ -110,15 +121,15 @@ class Goals extends Component{
             </select>
           </div>
           <div className="highlight-box">
-            <p>Next shopping limit</p>
-            <input readOnly value={this.props.nextShoppingLimit + " cal."}
+            <p className="goals-setting-text">Next shopping limit</p>
+            <input readOnly value={this.props.nextShoppingLimit + " kcal"}
               className="shopping-limit"
             />
             <p className="target-error" ></p>
           </div>
           <div className="shopping-basket-total">
             <p>Basket</p>
-            <input readOnly id="basketTotal" value={this.props.basketTotal + " cal."}
+            <input readOnly id="basketTotal" value={this.props.basketTotal + " kcal"}
               className={(this.props.overLimit) ? "basket-over-limit" : ""}
             />
             <p className="target-error" >{(this.props.overLimit) ? "Basket is over limit" : ""}</p>
@@ -142,7 +153,7 @@ function mapStateToProps(state){
     basketTotal: state.search.basketTotal,
     overLimit : state.search.overLimit,
     nextShoppingLimit : state.goals.nextShoppingLimit,
-    selectedItems : state.search.selectedItems,
+    selectedItems : state.search.selectedItems
   }
 }
 const mapPropsToActions = {
@@ -150,6 +161,7 @@ const mapPropsToActions = {
   removeCharFromConsumptionTarget,
   setShoppingPeriod,
   removeFromSelected,
-  sendSelectedToServer
+  sendSelectedToServer,
+  getSelectionFromServer
 };
 export default connect(mapStateToProps, mapPropsToActions)(Goals);

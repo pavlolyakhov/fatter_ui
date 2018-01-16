@@ -13,3 +13,4 @@ export const UPDATE_OVERLIMIT = "update_overlimit";
 export const REMOVE_FROM_BASKET = "remove_from_basket";
 export const GET_NEW_GUEST_ID = "get_new_guest_id";
 export const SAVE_GUEST_SELECTION = "save_guest_selection";
+export const SHOW_PREVIOUS_GUEST_PRODUCT_SELECTION_ONLOAD = "show_previous_guest_product_selection_onload";

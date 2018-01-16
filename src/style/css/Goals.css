@@ -11,19 +11,21 @@
 .goals-page > div{
   float: left;
     padding: 10px 20px;
-    background-color: green;
+    background-color: #8b0000;
     color: white;
     margin: 1% 2%;
-    /* max-width: 250px; */
     width: 350px;
     min-height: 150px;
     max-height: 150px;
     text-align: center;
     font-size: 22px;
     max-width: 16%;
+    border-radius: 6px;
 }
-.goals-page > div > p{
-  height:50%;
+
+.goals-setting-text{
+  min-height: 80px;
+  font-size: 18px;
 }
 .goals-page div>input, select{
   width:100%;
@@ -37,6 +39,7 @@
 }
 .shopping-basket-total{
   background-color: black !important;
+  border-radius: 0px !important;
   padding: 10px 0px !important;
 }
 .basket-over-limit{
@@ -46,8 +49,7 @@
   /* background-color: gray !important; */
 }
 .highlight-box{
-  border: 3px solid red;
-  border-radius: 6px;
+  /* border-radius: 6px; */
 }
 .basketActions{
   width: 100%;
@@ -63,4 +65,7 @@
   color: white;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+#howOftenShop{
+  padding: 4px;
 }

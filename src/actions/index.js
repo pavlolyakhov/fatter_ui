@@ -12,7 +12,8 @@ import {
   UPDATE_PRODUCT_QUANTITY,
   UPDATE_OVERLIMIT,
   REMOVE_FROM_BASKET,
-  SAVE_GUEST_SELECTION
+  SAVE_GUEST_SELECTION,
+  SHOW_PREVIOUS_GUEST_PRODUCT_SELECTION_ONLOAD
 } from './types';
 import {searchTake, GUEST_ID} from '../config';
 import {ROOT_URL} from '../configapi';
@@ -194,6 +195,21 @@ export function getGuestId(){
     localStorage.setItem(GUEST_ID, response.data.newGuestID)
   });
 
+}
+
+export function getSelectionFromServer(guestId){
+    return function(dispatch){
+      const ax = axios.get(`${ROOT_URL}/getGuestSelection/${guestId}`);
+       ax.then(response => {
+       console.log("products recieved", response.data.usableObj);
+      // const result = {...response.data, "searchText" : searchText, "searchOffset" : searchOffset }
+
+      dispatch({
+        type:  SHOW_PREVIOUS_GUEST_PRODUCT_SELECTION_ONLOAD,
+        payload: response.data
+      })
+    })
+  }
 }
 //promise way, instead of redux-thunk
 // export function fetchMessage(){

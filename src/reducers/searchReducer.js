@@ -4,7 +4,8 @@ import {
   UPDATE_SELECTED_ITEMS,
   UPDATE_PRODUCT_QUANTITY,
   UPDATE_OVERLIMIT,
-  REMOVE_FROM_BASKET
+  REMOVE_FROM_BASKET,
+  SHOW_PREVIOUS_GUEST_PRODUCT_SELECTION_ONLOAD
 } from '../actions/types';
 
 const defaultState = {
@@ -32,7 +33,7 @@ export default function(state=defaultState, action){
     case UPDATE_SELECTED_ITEMS:
       const payloadId = action.payload.id;
       const product = state.products[payloadId];
-      if(state.selectedItems[payloadId]){
+      if(state.selectedItems[payloadId]){               // if selected found, means  -> toggle -> deselect
         let existingProductQuantityValue = state.selectedItems[payloadId].productQuantity;
         newSelected = {...state.selectedItems};
         if(state.selectedItems[payloadId].id){
@@ -43,7 +44,7 @@ export default function(state=defaultState, action){
           newSelected[payloadId] = {...product, productQuantity : existingProductQuantityValue} ;
         }
       }
-      else {
+      else {                                            // if selected not found -> add it to selection
         newSelected = {...state.selectedItems};
         newSelected[payloadId] = product;
         newSelected[payloadId].productQuantity = "1";
@@ -56,7 +57,21 @@ export default function(state=defaultState, action){
       if(basketTotal > action.payload.nextShoppingLimit){
         overLimit = true
       }
+      console.log('manual selected', newSelected);
       return {...state, selectedItems: newSelected, basketTotal, overLimit}
+
+    case SHOW_PREVIOUS_GUEST_PRODUCT_SELECTION_ONLOAD:
+        newSelected = {...state.selectedItems, ...action.payload.usableObj};
+        newProducts = {...state.products, ...action.payload.usableObj};
+        _.mapKeys(newSelected, function(value, key){
+          if(value.productEnergy){
+            value.productQuantity = 1;
+            basketTotal+= +value.productEnergy*value.productQuantity;
+          }
+        });
+        console.log("previous data - from server", newSelected);
+      return {...state, products: newProducts, selectedItems: newSelected, basketTotal, overLimit:true}
+
     case UPDATE_PRODUCT_QUANTITY:
       if(state.selectedItems[action.payload.id]){
         newSelected = {...state.selectedItems};
