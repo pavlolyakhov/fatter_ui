@@ -34,6 +34,7 @@ class Goals extends Component{
         nextShoppingLimit : this.props.nextShoppingLimit,
         // howOftenShopValue : this.props.howOftenShopValue
       }
+      ;
       this.props.sendSelectedToServer(this.props.selectedItems, goals);
     }
     this.setState({

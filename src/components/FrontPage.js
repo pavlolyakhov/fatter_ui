@@ -31,7 +31,7 @@ class FrontPage extends Component {
             <h1>How it works</h1>
             <ul>
               <li>Create a weekly shopping list</li>
-              <li>Get itemized summary of calories per packaged item</li>
+              <li>Get itemized summary of calories per item</li>
               <li>Set your goals - know exactly how much energy you need</li>
               <li>Substruct the energy you will loose in gym. Connect to your fitness app</li>
               <li>Create a perfect calories-balanced shopping list</li>

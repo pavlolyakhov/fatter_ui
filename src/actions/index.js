@@ -151,7 +151,6 @@ export function getProducts(searchTerm, searchOffset){
 
 export function sendSelectedToServer(selectedItems, goals){
   console.log('sending selected to server');
-
   const guestId = localStorage.getItem("guestId");
   if(guestId){
     const dataObj = {guestId, selectedItems, goals};
@@ -171,8 +170,15 @@ export function updateSelected(id, nextShoppingLimit){
   }
 }
 
-export function updateProductQuantity(id, productQuantity, nextShoppingLimit){
-  const data = {id, productQuantity, nextShoppingLimit}
+// export function updateProductQuantity(id, productQuantity, nextShoppingLimit){
+//   const data = {id, productQuantity, nextShoppingLimit}
+//   return{
+//     type: UPDATE_PRODUCT_QUANTITY,
+//     payload:data
+//   }
+// }
+export function updateProductQuantity(id, mathOperation, nextShoppingLimit){    //mathOperation "+" or "-"
+  const data = {id, mathOperation, nextShoppingLimit}
   return{
     type: UPDATE_PRODUCT_QUANTITY,
     payload:data

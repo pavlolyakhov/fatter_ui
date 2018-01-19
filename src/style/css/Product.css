@@ -13,6 +13,7 @@
 }
 .product-quantity{
   margin-top:5px;
+  text-align: center;
 }
 .product-name p{
   margin: 0 0 2px;
@@ -56,4 +57,39 @@
 .product-weight-units-loose{
   color: #060669;
   font-weight: 600;
+}
+.product-quantity-control{
+  cursor: pointer;
+  font-size: 10px;
+  color: #d47979;
+  border: 4px solid #ffc0cb;
+  padding: 10px;
+  border-radius: 5px;
+}
+.product-quantity-control:hover{
+  background-color: #db7093;
+  color:white;
+  border-color: #db7093;
+}
+.product-quantity-number{
+  font-weight: 800;
+    color: darkred;
+    font-size: 14px;
+    margin-bottom: 0;
+}
+.product-quantity-units{
+    color: darkred;
+    font-size: 14px;
+    margin-bottom: 0;
+}
+.product-control-plus{
+  float: left;
+}
+.product-control-minus{
+  float:right;
+}
+.product-quantity-container{
+  width: 80px;
+    float: left;
+    margin-left: 10px;
 }

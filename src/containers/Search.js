@@ -6,6 +6,7 @@ import {
   updateSelected,
   updateProductQuantity,
 } from '../actions/index';
+import {GRAMS} from '../text/EN/en-gb';
 import Product from '../components/Product';
 import {searchOffset, searchTake, scrollThrottleDelay} from '../config';
 import '../style/css/Search.css';
@@ -23,7 +24,7 @@ class Search extends Component{
   }
 
   componentDidMount() {
-      window.addEventListener('scroll', _.throttle(this.checkWindowPosition,scrollThrottleDelay));
+      window.addEventListener('scroll', _.throttle(this.checkWindowPosition, scrollThrottleDelay));
   }
   componentWillUnmount() {
     //window.removeEventListener('scroll');
@@ -75,11 +76,22 @@ class Search extends Component{
     }
   }
 
-  handleProductChangeQuantity(e){
+  // handleProductIncreaseQuantity(e){
+  //   const currentTarget = e.currentTarget;
+  //   const productQuantity = currentTarget.value;
+  //   const itemId = currentTarget.getAttribute('data-productid');
+  //   const btnAction = currentTarget.getAttribute('data-action');
+  //   this.props.updateProductQuantity(itemId, productQuantity, this.props.nextShoppingLimit);
+  // }
+  handleProductIncreaseQuantity(e){
     const currentTarget = e.currentTarget;
-    const productQuantity = currentTarget.value;
+    //const productQuantity = currentTarget.value;
     const itemId = currentTarget.getAttribute('data-productid');
-    this.props.updateProductQuantity(itemId, productQuantity, this.props.nextShoppingLimit);
+    this.props.updateProductQuantity(itemId, "+", this.props.nextShoppingLimit);
+  }
+
+  handleProductReduceQuantity(e){
+
   }
 
   render(){
@@ -97,11 +109,13 @@ class Search extends Component{
         productId = {db[key].id}
         itemFound = {(selected[key]) ? true : false}              //if id key is found in selected -> returns true
         selectedId = {(selected[key]) ? selected[key].id : ""}
-        handleProductChangeQuantity = {this.handleProductChangeQuantity.bind(this)}
+        handleProductIncreaseQuantity = {this.handleProductIncreaseQuantity.bind(this)}
+        handleProductReduceQuantity = {this.handleProductReduceQuantity.bind(this)}
         tpnb = {db[key].tbnp}
-        weightUnits = {db[key].weightUnits}
+        weightUnits = {(db[key].weightUnits.includes("100")) ? GRAMS : (db[key].productQuantity > 1) ? "items" : "item" }
         quantity = {db[key].quantity}
         UnitOfSale = {db[key].UnitOfSale}     // 3 -> means loose item per 100g, come from Tescto API; 1-> packaged ( from observation)
+        productQuantity = {(selected[key]) ? selected[key].productQuantity : db[key].productQuantity}
       />
   });
     return(
