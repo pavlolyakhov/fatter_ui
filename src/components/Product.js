@@ -27,12 +27,13 @@ class Product extends Component{
                                {ENERGY}
                              </span>
                           </div>
-                          <div><span>
+                          <div>
+                            <span>
                             {(this.props.UnitOfSale === 3) ? this.props.quantity : ""}
-                          </span>
-                          <span className={(this.props.UnitOfSale === 3) ? "product-weight-units-loose" : ""}>
-                            {(this.props.UnitOfSale === 3) ? ` per 100 ${GRAMS}` : ""  }
-                          </span></div>
+                            </span>
+                            <span className={(this.props.UnitOfSale === 3) ? "product-weight-units-loose" : ""}>
+                              {(this.props.UnitOfSale === 3) ? ` per 100 ${GRAMS}` : ""  }
+                            </span></div>
                           <div>
                             <span>£</span><span>{this.props.price}</span>
                           </div>
@@ -40,17 +41,19 @@ class Product extends Component{
                   </div>
               </div>
           </div>
-          <div className="product-quantity" >
+          <div className={(this.props.itemFound && this.props.selectedId) ? "product-quantity" : "product-quantity product-quantity-hidden" }>
             <div className="glyphicon glyphicon-plus product-quantity-control product-control-plus"
               data-productid = {this.props.productId}
-              onClick = {this.props.handleProductIncreaseQuantity}></div>
-              <div className="product-quantity-container">
-                <p className="product-quantity-number">{this.props.productQuantity}</p>
-                <p className="product-quantity-units"> {this.props.weightUnits}</p>
-              </div>
+              onClick = {this.props.handleProductIncreaseQuantity}>
+            </div>
+            <div className="product-quantity-container">
+              <p className="product-quantity-number">{this.props.productQuantity}</p>
+              <p className="product-quantity-units"> {this.props.weightUnits}</p>
+            </div>
             <div className="glyphicon glyphicon-minus product-quantity-control product-control-minus"
               data-productid = {this.props.productId}
-              onClick={this.props.handleProductReduceQuantity}></div>
+              onClick={this.props.handleProductReduceQuantity}>
+            </div>
             {/* <input
               defaultValue="1"
               className="inputQuantity"

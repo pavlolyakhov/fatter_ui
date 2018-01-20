@@ -85,13 +85,14 @@ class Search extends Component{
   // }
   handleProductIncreaseQuantity(e){
     const currentTarget = e.currentTarget;
-    //const productQuantity = currentTarget.value;
     const itemId = currentTarget.getAttribute('data-productid');
     this.props.updateProductQuantity(itemId, "+", this.props.nextShoppingLimit);
   }
 
   handleProductReduceQuantity(e){
-
+    const currentTarget = e.currentTarget;
+    const itemId = currentTarget.getAttribute('data-productid');
+    this.props.updateProductQuantity(itemId, "-", this.props.nextShoppingLimit);
   }
 
   render(){

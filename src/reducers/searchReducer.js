@@ -74,7 +74,7 @@ export default function(state=defaultState, action){
           }
         }
         else{
-          newSelected[payloadId].productQuantity = 1;
+          // newSelected[payloadId].productQuantity = 1
         }
       }
       _.mapKeys(newSelected, function(value, key){
@@ -118,8 +118,8 @@ export default function(state=defaultState, action){
     case UPDATE_PRODUCT_QUANTITY:
       const itemId = action.payload.id;
       const mathOperation = action.payload.mathOperation;
+      newSelected = {...state.selectedItems};
       if(state.selectedItems[itemId]){                 // if item is selected or just incremented without selection
-        newSelected = {...state.selectedItems};
         if(newSelected[itemId].UnitOfSale === 3){     // loose items sold by grams
           if(mathOperation === "+"){
             newSelected[itemId].productQuantity += 100;

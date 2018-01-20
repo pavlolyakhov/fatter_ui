@@ -93,3 +93,6 @@
     float: left;
     margin-left: 10px;
 }
+.product-quantity-hidden{
+  display: none;
+}
