@@ -18,3 +18,8 @@
 .selected-basket-item-text{
 
 }
+#selectedListHeader{
+  padding: 10px;
+  cursor: move;
+  z-index: 201;
+}
