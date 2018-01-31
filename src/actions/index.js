@@ -6,14 +6,15 @@ import {
   AUTH_ERROR,
   UPDATE_CONSUMPTION_TARGET,
   REMOVE_CHAR_CONSUMPTION_TARGET,
-  SET_SHOPPING_PERIOD,
+  //SET_SHOPPING_PERIOD,
   SET_PRODUCTS,
   UPDATE_SELECTED_ITEMS,
   UPDATE_PRODUCT_QUANTITY,
   UPDATE_OVERLIMIT,
   REMOVE_FROM_BASKET,
   SAVE_GUEST_SELECTION,
-  SHOW_PREVIOUS_GUEST_PRODUCT_SELECTION_ONLOAD
+  SHOW_PREVIOUS_GUEST_PRODUCT_SELECTION_ONLOAD,
+  MARK_ITEM_BOUGHT
 } from './types';
 import {searchTake, GUEST_ID} from '../config';
 import {ROOT_URL} from '../configapi';
@@ -112,18 +113,26 @@ export function updateConsumptionTarget(input){
 }
 
 export function removeCharFromConsumptionTarget(){
-  return{
+  return {
     type: REMOVE_CHAR_CONSUMPTION_TARGET,
     payload: ""
   }
 }
 
-export function setShoppingPeriod(period){
-  return{
-    type:SET_SHOPPING_PERIOD,
-    payload:period
+export function markItemBought(itemId){
+  const data = {itemId};
+  return {
+    type: MARK_ITEM_BOUGHT,
+    payload: data
   }
 }
+
+// export function setShoppingPeriod(period){
+//   return{
+//     type:SET_SHOPPING_PERIOD,
+//     payload:period
+//   }
+// }
 
 export function removeFromSelected(itemId){
   return{
@@ -150,7 +159,7 @@ export function getProducts(searchTerm, searchOffset){
 }
 
 export function sendSelectedToServer(selectedItems, goals){
-  console.log('sending selected to server');
+  console.log('sending selected to server', selectedItems);
   const guestId = localStorage.getItem("guestId");
   if(guestId){
     const dataObj = {guestId, selectedItems, goals};
@@ -162,23 +171,16 @@ export function sendSelectedToServer(selectedItems, goals){
   }
 }
 
-export function updateSelected(id, nextShoppingLimit){
-  const data = {id, nextShoppingLimit}
+export function updateSelected(id, weeklyTotal){
+  const data = {id, weeklyTotal}
   return{
     type: UPDATE_SELECTED_ITEMS,
     payload:data
   }
 }
 
-// export function updateProductQuantity(id, productQuantity, nextShoppingLimit){
-//   const data = {id, productQuantity, nextShoppingLimit}
-//   return{
-//     type: UPDATE_PRODUCT_QUANTITY,
-//     payload:data
-//   }
-// }
-export function updateProductQuantity(id, mathOperation, nextShoppingLimit){    //mathOperation "+" or "-"
-  const data = {id, mathOperation, nextShoppingLimit}
+export function updateProductQuantity(id, mathOperation, weeklyTotal){    //mathOperation "+" or "-"
+  const data = {id, mathOperation, weeklyTotal}
   return{
     type: UPDATE_PRODUCT_QUANTITY,
     payload:data

@@ -11,7 +11,7 @@ import App from './App';
 import LoginPage from './containers/LoginPage';
 import ProtectedPage from './components/protected';
 import RequireAuth from './components/auth/require_auth';
-import Goals from './containers/Goals';
+import SearchPage from './containers/SearchPage';
 import './style/css/style.css';
 
 
@@ -21,9 +21,10 @@ ReactDOM.render(
       <div>
           <Switch>
             <Route path="/signin" component={LoginPage} />
-            <Route path="/goals" component={Goals} />
+            <Route path="/goals" component={SearchPage} />
             <Route path="/protected" component={RequireAuth(ProtectedPage)} />
-            <Route path="/" component={App} />
+            {/* <Route path="/" component={App} /> */}
+            <Route path="/" component={SearchPage} />
           </Switch>
       </div>
     </BrowserRouter>

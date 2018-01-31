@@ -7,7 +7,8 @@
   font-weight: 900;
 }
 .navbar-default .navbar-brand {
-    color: #337ab7;
+    /* color: #337ab7; */
+    color: darkred;
 }
 .navbar {
     border: 1px solid #f08080;
@@ -16,4 +17,5 @@
 }
 .nav-link{
   cursor:pointer;
+  color: black !important;
 }

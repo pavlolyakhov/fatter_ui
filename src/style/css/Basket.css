@@ -1,0 +1,26 @@
+.shopping-basket-total{
+  background-color: black !important;
+  /* border-radius: 0px !important; */
+  padding: 10px 0px !important;
+  width: 20%;
+  display: inline-block;
+  border-radius: 6px;
+  text-align: center;
+  position: fixed;
+  margin-left: 20px;
+}
+.shopping-basket-header{
+  color: white;
+  font-size: 60px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+#basketTotal{
+  width:90%;
+  text-align: center;
+}
+.target-error{
+  font-size: 14px;
+  color:pink;
+  height: 18px !important;
+}

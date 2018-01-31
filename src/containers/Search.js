@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {
   getProducts,
   updateSelected,
-  updateProductQuantity,
+  //updateProductQuantity,
 } from '../actions/index';
 import {GRAMS} from '../text/EN/en-gb';
 import Product from '../components/Product';
@@ -72,28 +72,21 @@ class Search extends Component{
     const currentTarget = e.currentTarget;
     if(!target.classList.contains('inputQuantity')){    // click was NOT on Quantity selection, not to select product
       const itemId = currentTarget.getAttribute('data-productid');
-      this.props.updateSelected(itemId, this.props.nextShoppingLimit);
+      this.props.updateSelected(itemId, this.props.weeklyTotal);
     }
   }
 
   // handleProductIncreaseQuantity(e){
   //   const currentTarget = e.currentTarget;
-  //   const productQuantity = currentTarget.value;
   //   const itemId = currentTarget.getAttribute('data-productid');
-  //   const btnAction = currentTarget.getAttribute('data-action');
-  //   this.props.updateProductQuantity(itemId, productQuantity, this.props.nextShoppingLimit);
+  //   this.props.updateProductQuantity(itemId, "+", this.props.weeklyTotal);
   // }
-  handleProductIncreaseQuantity(e){
-    const currentTarget = e.currentTarget;
-    const itemId = currentTarget.getAttribute('data-productid');
-    this.props.updateProductQuantity(itemId, "+", this.props.nextShoppingLimit);
-  }
-
-  handleProductReduceQuantity(e){
-    const currentTarget = e.currentTarget;
-    const itemId = currentTarget.getAttribute('data-productid');
-    this.props.updateProductQuantity(itemId, "-", this.props.nextShoppingLimit);
-  }
+  //
+  // handleProductReduceQuantity(e){
+  //   const currentTarget = e.currentTarget;
+  //   const itemId = currentTarget.getAttribute('data-productid');
+  //   this.props.updateProductQuantity(itemId, "-", this.props.weeklyTotal);
+  // }
 
   render(){
     const db = this.props.products;
@@ -110,8 +103,8 @@ class Search extends Component{
         productId = {db[key].id}
         itemFound = {(selected[key]) ? true : false}              //if id key is found in selected -> returns true
         selectedId = {(selected[key]) ? selected[key].id : ""}
-        handleProductIncreaseQuantity = {this.handleProductIncreaseQuantity.bind(this)}
-        handleProductReduceQuantity = {this.handleProductReduceQuantity.bind(this)}
+        handleProductIncreaseQuantity = {this.props.handleProductIncreaseQuantity}
+        handleProductReduceQuantity = {this.props.handleProductReduceQuantity}
         tpnb = {db[key].tbnp}
         weightUnits = {(db[key].weightUnits.includes("100")) ? GRAMS : (db[key].productQuantity > 1) ? "items" : "item" }
         quantity = {db[key].quantity}
@@ -120,7 +113,7 @@ class Search extends Component{
       />
   });
     return(
-      <div>
+      <div id="search-container">
         <div id="searchProducts">
           <div id="searchBar">
             <form onSubmit={this.handleSearchClick.bind(this)}>
@@ -145,7 +138,7 @@ function mapStateToProps({search, goals}){
     selectedItems : search.selectedItems,
     weeklyTotal : goals.weeklyTotal,
     overLimit: search.overLimit,
-    nextShoppingLimit : goals.nextShoppingLimit,
+    //nextShoppingLimit : goals.nextShoppingLimit,
     searchOffset : search.searchOffset,
     searchText : search.searchText
   }
@@ -153,6 +146,6 @@ function mapStateToProps({search, goals}){
 const mapPropsToActions = {
   getProducts,
   updateSelected,
-  updateProductQuantity
+  //updateProductQuantity
 };
 export default connect(mapStateToProps, mapPropsToActions)(Search);

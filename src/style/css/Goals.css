@@ -1,12 +1,11 @@
-.goals-container{
-  background-color: #f5f5dc;
-}
 .goals-page {
-  padding-top: 70px;
   margin-left: 20px;
   /* display: flex; */
   flex-direction: row;
   justify-content: center;
+  width: 20%;
+  margin-top: 50px;
+  padding-top: 20px;
 }
 .goals-page > div{
   float: left;
@@ -14,34 +13,30 @@
     background-color: #8b0000;
     color: white;
     margin: 1% 2%;
-    width: 350px;
+    /* width: 350px; */
     min-height: 150px;
-    max-height: 150px;
+    /* max-height: 150px; */
     text-align: center;
     font-size: 22px;
-    max-width: 16%;
+    /* max-width: 16%; */
     border-radius: 6px;
 }
 
 .goals-setting-text{
-  min-height: 70px;
+  min-height: 25px;
   font-size: 18px;
 }
 .goals-page div>input, select{
   width:100%;
-  color:darkgreen;
+  color:black;
   text-align: center;
 }
-.target-error{
-  font-size: 14px;
-  color:pink;
-  height: 18px !important;
-}
-.shopping-basket-total{
+
+/* .shopping-basket-total{
   background-color: black !important;
   border-radius: 0px !important;
   padding: 10px 0px !important;
-}
+} */
 .basket-over-limit{
   color:red !important;
 }
@@ -56,9 +51,7 @@
   background-color: black;
   padding-bottom: 30px;
 }
-#basketTotal{
-  width:90%;
-}
+
 #btnSaveBasket{
   width: 90%;
   background-color: lightcoral;
@@ -68,4 +61,8 @@
 }
 #howOftenShop{
   padding: 4px;
+}
+#basketLimit{
+  background-color: #8b0000;
+  color: white;
 }

@@ -35,21 +35,21 @@ store.subscribe(()=>{
    // console.log('weeklyTotal', store.getState().goals.weeklyTotal);
 });
 
-let watchNextShoppingLimit = watch(store.getState, 'goals.nextShoppingLimit')
-store.subscribe(watchNextShoppingLimit((newVal, oldVal, objectPath) => {
+let watchWeeklyTotal = watch(store.getState, 'goals.weeklyTotal')
+store.subscribe(watchWeeklyTotal((newVal, oldVal, objectPath) => {
   // console.log('%s changed from %s to %s', objectPath, oldVal, newVal)
   if(oldVal !== newVal){
-    store.dispatch({ type: UPDATE_OVERLIMIT, payload: { nextShoppingLimit: newVal }});
+    store.dispatch({ type: UPDATE_OVERLIMIT, payload: { weeklyTotal: newVal }});
   }
 })
 );
 
-let watchHowOftenShopValue = watch(store.getState, 'goals.howOftenShopValue')
-store.subscribe(watchHowOftenShopValue((newVal, oldVal, objectPath) => {
-  // console.log('%s changed from %s to %s', objectPath, oldVal, newVal)
-  if(oldVal !== newVal){
-    const weeklyTotal = store.getState().goals.weeklyTotal;
-    store.dispatch({ type: UPDATE_OVERLIMIT, payload: { weeklyTotal: weeklyTotal, howOftenShopValue : newVal }});
-  }
-})
-);
+// let watchHowOftenShopValue = watch(store.getState, 'goals.howOftenShopValue')
+// store.subscribe(watchHowOftenShopValue((newVal, oldVal, objectPath) => {
+//   // console.log('%s changed from %s to %s', objectPath, oldVal, newVal)
+//   if(oldVal !== newVal){
+//     const weeklyTotal = store.getState().goals.weeklyTotal;
+//     store.dispatch({ type: UPDATE_OVERLIMIT, payload: { weeklyTotal: weeklyTotal, howOftenShopValue : newVal }});
+//   }
+// })
+// );

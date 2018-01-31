@@ -52,11 +52,11 @@ class Header extends Component{
             </button>
             <Link className="navbar-brand" to="/">{BRAND_NAME}</Link>
           </div>
-          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          {/* <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav auth-controls">
               {this.toggleSigninButtonText()}
             </ul>
-          </div>
+          </div> */}
         </div>
       </nav>
     )

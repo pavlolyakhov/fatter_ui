@@ -5,7 +5,8 @@ import {
   UPDATE_PRODUCT_QUANTITY,
   UPDATE_OVERLIMIT,
   REMOVE_FROM_BASKET,
-  SHOW_PREVIOUS_GUEST_PRODUCT_SELECTION_ONLOAD
+  SHOW_PREVIOUS_GUEST_PRODUCT_SELECTION_ONLOAD,
+  MARK_ITEM_BOUGHT
 } from '../actions/types';
 
 const defaultState = {
@@ -19,7 +20,7 @@ const defaultState = {
 };
 
 export default function(state=defaultState, action){
-  let newSelected = {}, basketTotal = 0, overLimit = false, newProducts= {};
+  let newSelected = {}, basketTotal = 0, overLimit = false, newProducts= {}, itemId = "";
   switch(action.type){
     case SET_PRODUCTS:
       console.log(SET_PRODUCTS, action.payload);
@@ -65,6 +66,7 @@ export default function(state=defaultState, action){
       else {                                                  // if selected not found -> add it to selection
         newSelected = {...state.selectedItems};
         newSelected[payloadId] = product;
+        newSelected[payloadId].isBought ? newSelected[payloadId].isBought : newSelected[payloadId].isBought = false;
         if(!newSelected[payloadId].productQuantity){
           if(newSelected[payloadId].UnitOfSale === 3){        // if item sold as loose -> per 100 grams
             newSelected[payloadId].productQuantity = 100;     // default 100 grams
@@ -90,7 +92,7 @@ export default function(state=defaultState, action){
           }
         }
       });
-      if(basketTotal > action.payload.nextShoppingLimit){
+      if(basketTotal > action.payload.weeklyTotal){
         overLimit = true
       }
       console.log('manual selected', newSelected);
@@ -114,13 +116,18 @@ export default function(state=defaultState, action){
         });
         console.log("previous data - from server", newSelected);
       return {...state, products: newProducts, selectedItems: newSelected, basketTotal, overLimit:true}
+    case MARK_ITEM_BOUGHT:
+      itemId = action.payload.itemId;
+      newSelected = {...state.selectedItems};
+      newSelected[itemId].isBought ? newSelected[itemId].isBought = false : newSelected[itemId].isBought = true;
+      return {...state, selectedItems: newSelected}
 
     case UPDATE_PRODUCT_QUANTITY:
-      const itemId = action.payload.id;
+      itemId = action.payload.id;
       const mathOperation = action.payload.mathOperation;
       newSelected = {...state.selectedItems};
-      if(state.selectedItems[itemId]){                 // if item is selected or just incremented without selection
-        if(newSelected[itemId].UnitOfSale === 3){     // loose items sold by grams
+    if(state.selectedItems[itemId]){                                // if item is selected or just incremented without selection
+        if(newSelected[itemId].UnitOfSale === 3){                   // loose items sold by grams
           if(mathOperation === "+"){
             newSelected[itemId].productQuantity += 100;
           }
@@ -160,12 +167,12 @@ export default function(state=defaultState, action){
           }
         }
       });
-      if(basketTotal > action.payload.nextShoppingLimit){
+      if(basketTotal > action.payload.weeklyTotal){
         overLimit = true
       }
       return {...state, selectedItems: newSelected, basketTotal, overLimit}
     case UPDATE_OVERLIMIT:
-      if(state.basketTotal > action.payload.nextShoppingLimit){
+      if(state.basketTotal > action.payload.weeklyTotal){
         overLimit = true;
       }
       else{

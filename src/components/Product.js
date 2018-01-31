@@ -33,7 +33,8 @@ class Product extends Component{
                             </span>
                             <span className={(this.props.UnitOfSale === 3) ? "product-weight-units-loose" : ""}>
                               {(this.props.UnitOfSale === 3) ? ` per 100 ${GRAMS}` : ""  }
-                            </span></div>
+                            </span>
+                          </div>
                           <div>
                             <span>£</span><span>{this.props.price}</span>
                           </div>
@@ -54,24 +55,7 @@ class Product extends Component{
               data-productid = {this.props.productId}
               onClick={this.props.handleProductReduceQuantity}>
             </div>
-            {/* <input
-              defaultValue="1"
-              className="inputQuantity"
-              maxLength="2"
-              data-productid = {this.props.productId}
-              onChange = {this.props.handleProductChangeQuantity}
-            /> */}
           </div>
-          {/* <div className="product-quantity" >
-            <span>Quantity </span>
-            <input
-              defaultValue="1"
-              className="inputQuantity"
-              maxLength="2"
-              data-productid = {this.props.productId}
-              onChange = {this.props.handleProductChangeQuantity}
-            />
-          </div> */}
         </div>
       </div>
     )

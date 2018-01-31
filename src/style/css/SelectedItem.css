@@ -1,11 +1,12 @@
 .selected-item-remove{
-  padding: 15px 15px;
+  padding: 7px 7px;
   color: pink;
   border: 1px solid white;
   border-radius: 5px;
-  margin-left: 25px;
+  margin-left: -25px;
   cursor: pointer;
-  float: right;
+  float: left;
+  margin-right: 5px;
 }
 .selectedItem{
   margin: 5px;
@@ -18,8 +19,54 @@
 .selected-basket-item-text{
 
 }
+.selected-basket-item-text-bought{
+  text-decoration: line-through;
+}
 #selectedListHeader{
   padding: 10px;
   cursor: move;
   z-index: 201;
+}
+.product-control-plus-list{
+
+}
+.product-control-minus-list{
+
+}
+.product-quantity-control-list{
+  cursor: pointer;
+  font-size: 10px;
+  color: pink;
+  border: 2px solid white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+.product-quantity-control-list:hover{
+  background-color: #db7093;
+  color:white;
+  border-color: #db7093;
+}
+.selected-basket-item-quantity{
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+}
+.selected-basket-item-bought{
+  cursor: pointer;
+  font-size: 14px;
+  color: pink;
+  border: 2px solid white;
+  padding: 6px 10px 10px 10px;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+.selected-basket-item-notbought{
+  cursor: pointer;
+  font-size: 14px;
+  color: grey;
+  border: 2px solid grey;
+  padding: 6px 10px 10px 10px;
+  border-radius: 5px;
+  margin-left: 10px;
 }
