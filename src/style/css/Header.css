@@ -8,7 +8,9 @@
 }
 .navbar-default .navbar-brand {
     /* color: #337ab7; */
-    color: darkred;
+    /* color: darkred; */
+    color: white;
+    font-size: 40px;
 }
 .navbar {
     border: 1px solid #f08080;

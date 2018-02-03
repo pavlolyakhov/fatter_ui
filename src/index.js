@@ -7,7 +7,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
-import App from './App';
+// import App from './App';
 import LoginPage from './containers/LoginPage';
 import ProtectedPage from './components/protected';
 import RequireAuth from './components/auth/require_auth';

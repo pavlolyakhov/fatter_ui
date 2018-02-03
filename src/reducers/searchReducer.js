@@ -66,7 +66,7 @@ export default function(state=defaultState, action){
       else {                                                  // if selected not found -> add it to selection
         newSelected = {...state.selectedItems};
         newSelected[payloadId] = product;
-        newSelected[payloadId].isBought ? newSelected[payloadId].isBought : newSelected[payloadId].isBought = false;
+        newSelected[payloadId].isBought ? newSelected[payloadId].isBought = true : newSelected[payloadId].isBought = false;
         if(!newSelected[payloadId].productQuantity){
           if(newSelected[payloadId].UnitOfSale === 3){        // if item sold as loose -> per 100 grams
             newSelected[payloadId].productQuantity = 100;     // default 100 grams
